@@ -46,11 +46,9 @@ public class ListaSimple <T> {
 			return inicio == null;
 		}
 		
-		public void agregarAlFinal(T method){
+		  public void agregarAlFinal(String method){
 
-			NodoSimple <T> nuevo = new NodoSimple <T>(method);
-
-			nuevo.setValor(method);
+			NodoSimple  nuevo = new NodoSimple(method);
 
 			if (esVacia()) {
 

@@ -21,8 +21,12 @@ import Control.NodoArbolNArio;
 
 public class ArbolDatos {
 	
-	ArbolNArio arbol =new ArbolNArio();
-	
+	ArbolNArio arbol;
+	ListaSimple<String> metodos;
+	public ArbolDatos() {
+		this.arbol = new ArbolNArio<>();
+		this.metodos = new ListaSimple<>();
+	}
 
 	public void Raiz(MethodVisitor visitor) {
 		System.out.println("Creacion de raiz iniciada");
@@ -34,9 +38,11 @@ public class ArbolDatos {
 		
 		
 	for (MethodDeclaration method : visitor.getMethods()) {
-			Metodos(method, raiz);      				
+		metodos.agregarAlFinal(method.getName().toString());	
+		Metodos(method, raiz);
+		
     } 
-
+	metodos.Print();
 	}
 		
 		
@@ -60,7 +66,7 @@ public class ArbolDatos {
 		
 		
 		int index=0;
-    	while (index < ListaStatements.size() -1) {
+    	while (index < ListaStatements.size()) {
     		
     		NodoArbolNArio statementHijo = new NodoArbolNArio(ListaStatements.get(index));
     		statementHijo.setNombre(ListaStatements.get(index).toString());
@@ -70,8 +76,9 @@ public class ArbolDatos {
     		
     		
     		System.out.println("indice  "+ index +"   "+ ListaStatements.get(index));
-    		index ++;
+    		
     		VerTipo(ListaStatements.get(index), statementHijo);
+    		index ++;
     	}
 	}
 
@@ -198,7 +205,10 @@ public class ArbolDatos {
 		
 		
 	}
-
+	
+	public ListaSimple getMetodos() {
+		return metodos;
+	}
 }
 	
 

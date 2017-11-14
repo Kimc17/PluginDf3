@@ -1,4 +1,12 @@
-package plugindf3.handlers;
+package interfaz.views;
+
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.ui.part.*;
+
+import Control.ListaSimple;
+import Modelo.ArbolDatos;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -26,15 +34,89 @@ import Modelo.ArbolDatos;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 
-/**
- * Our sample handler extends AbstractHandler, an IHandler base class.
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
- */
-public class SampleHandler extends AbstractHandler {
-ArbolDatos arbol = new ArbolDatos();
+
+import org.eclipse.ui.*;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
+import javax.inject.Inject;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
+
+public class PluginDF extends ViewPart {
+	public PluginDF() {
+		
+	}
+	
+
+	public static final String ID = "interfaz.views.PluginDF";
+
+	@Inject IWorkbench workbench;
+	 
+
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	public void createPartControl(Composite parent) {
+		
+		Composite composite = new Composite(parent, SWT.EMBEDDED);
+		
+		Button btnDiagramar = new Button(composite, SWT.NONE);
+		btnDiagramar.setBounds(150, 10, 75, 25);
+		btnDiagramar.setText("Diagramar");
+		
+		
+		Combo combo = new Combo(composite, SWT.NONE);
+		combo.setBounds(24, 12, 91, 23);	
+		combo.add("If");
+		combo.add("For");
+		combo.add("While");
+	
+		
+		Canvas canvas = new Canvas(composite, SWT.NONE);
+		canvas.setBounds(10, 41, 2000, 2000);
+		
+		Button btnLeer = new Button(composite, SWT.NONE);
+		btnLeer.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnLeer.setBounds(252, 10, 75, 25);
+		btnLeer.setText("Cargar Métodos");
+		btnLeer.addListener(SWT.Selection, new Listener() {
+			
+			@Override
+			public void handleEvent(Event event) {
+				caca();
+				
+			}
+		});
+		
+	    btnDiagramar.addListener(SWT.Selection, new Listener() {
+	        public void handleEvent(Event e) {
+	        	canvas.redraw();
+	        	canvas.addPaintListener(new PaintListener() {
+					
+					@Override
+					public void paintControl(PaintEvent e) {
+						e.gc.fillRectangle(0, 0, 2000, 2000);
+						
+					}
+				});
+	        	String tipo = combo.getText();
+	        	Diagrama dele = new Diagrama(canvas, tipo);
+	        	
+	        	
+	        }
+	      });
+		
+
+	}
+	
+	public Object caca() {
 		System.out.println("Clic detectado");
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IWorkspaceRoot root = workspace.getRoot();
@@ -69,8 +151,7 @@ ArbolDatos arbol = new ArbolDatos();
 		}
 		return null;
 	}
-
-
+	
 
 	private static CompilationUnit parse(ICompilationUnit unit) {
 		ASTParser parser = ASTParser.newParser(AST.JLS9);
@@ -79,5 +160,10 @@ ArbolDatos arbol = new ArbolDatos();
 		parser.setResolveBindings(true);
 		return (CompilationUnit) parser.createAST(null); // parse
 	}
-	
+
+
+	@Override
+	public void setFocus() {
+		
+	}
 }

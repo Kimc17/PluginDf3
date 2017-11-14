@@ -3,6 +3,21 @@
 <plugin>
 
    <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="PluginDF"
+            id="Interfaz">
+      </category>
+      <view
+            name="PluginDF"
+            inject="true"
+            icon="icons/sample.png"
+            category="Interfaz"
+            class="interfaz.views.PluginDF"
+            id="interfaz.views.PluginDF">
+      </view>
+   </extension>
+      <extension
          point="org.eclipse.ui.commands">
       <category
             name="Sample Category"
@@ -58,5 +73,6 @@
          </toolbar>
       </menuContribution>
    </extension>
+   
 
 </plugin>

@@ -1,4 +1,4 @@
-package Control;
+package Estructuras;
 
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 
@@ -7,7 +7,7 @@ public class ListaSimple <T> {
 		
 		private NodoSimple <T> inicio;
 		private int size;
-		public  T name;
+		public  String name;
 		
 
 		
@@ -31,10 +31,10 @@ public class ListaSimple <T> {
 		public void setSize(int size) {
 			this.size = size;
 		}
-		public T getName() {
+		public String getName() {
 			return name;
 		}
-		public void setName(T name) {
+		public void setName(String name) {
 			this.name = name;
 		}
 		
@@ -46,9 +46,9 @@ public class ListaSimple <T> {
 			return inicio == null;
 		}
 		
-		  public void agregarAlFinal(String method){
+		public void agregarAlFinal(Object object, String si, String no, String expression, String body, String tipo){
 
-			NodoSimple  nuevo = new NodoSimple(method);
+			NodoSimple  nuevo = new NodoSimple(object,si, no, expression, body, tipo);
 
 			if (esVacia()) {
 
@@ -84,25 +84,30 @@ public class ListaSimple <T> {
 		}
 		
 
-		public Object Extraer(String referencia){
+		public Object Extraer(String i){
 			NodoSimple <T> aux = inicio;
 			boolean encontrado = false;
 			while(aux != null && encontrado != true){
-				if (referencia == aux.getName()){
+				if (i == aux.getName()){
 					encontrado = true;
 				}
 				else{
 					aux = aux.getSiguiente();
 				}
 			}
-			return aux.getValor();
+			return aux.getName();
 		}
 
 		
 		public void Print(){
 			NodoSimple <T> aux = inicio;
 			while(aux != null){
-					System.out.println(aux.getValor());
+					System.out.println("nombre  " + aux.getName());
+					System.out.println("tipo   " + aux.tipo);
+					System.out.println("expression   " + aux.getExpresion());
+					System.out.println("si  " + aux.getSi());
+					System.out.println("no  " + aux.getNo());
+					System.out.println("body   " + aux.getBody());
 					aux = aux.getSiguiente();
 				}
 		

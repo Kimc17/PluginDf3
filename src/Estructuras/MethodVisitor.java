@@ -1,4 +1,4 @@
-package Control;
+package Estructuras;
 
 import java.util.ArrayList;
 import java.util.List;

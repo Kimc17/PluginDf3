@@ -5,7 +5,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.part.*;
 
-import Control.ListaSimple;
+
+import Estructuras.MethodVisitor;
+import Estructuras.listaDoble;
 import Modelo.ArbolDatos;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -27,8 +29,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import Control.ArbolNArio;
-import Control.MethodVisitor;
+
 import Modelo.ArbolDatos;
 
 
@@ -47,9 +48,13 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 
+
 public class PluginDF extends ViewPart {
+	listaDoble estructura;	
+	
+	
 	public PluginDF() {
-		
+		estructura=new listaDoble("lista metodos");
 	}
 	
 
@@ -136,7 +141,9 @@ public class PluginDF extends ViewPart {
 								MethodVisitor visitor = new MethodVisitor();
                                 parse.accept(visitor);
                                 ArbolDatos arbol= new ArbolDatos();
-                                arbol.Raiz(visitor);
+                                estructura = arbol.Raiz(visitor);
+                                System.out.println("La estructura es");
+                                estructura.Print();
                                 
                                 
     

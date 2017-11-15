@@ -110,16 +110,14 @@ public class listaDoble {
 	
 	public ListaSimple Extraer(String referencia){
 		NodoDoble aux = inicio;
-		boolean encontrado = false;
-		while(aux != null && encontrado != true){
-			if (referencia == aux.getName()){
-				encontrado = true;
-			}
-			else{
+		while(aux != null) {
+			if(aux.getName().equals(referencia)) {
+				return aux.getValor();
+			}else {
 				aux = aux.getSiguiente();
 			}
 		}
-		return aux.getValor();
+		return null;
 	}
 	
 	public void Print(){

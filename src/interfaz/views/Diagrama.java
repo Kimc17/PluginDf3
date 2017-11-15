@@ -2,35 +2,40 @@ package interfaz.views;
 
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Canvas;
+
+import Estructuras.ListaSimple;
+import Estructuras.NodoSimple;
 
 public class Diagrama{
 	int x;
 	int y;
 	Canvas canvas;
-	public Diagrama(Canvas canvas, String tipo) {
+	ListaSimple<String> datos;
+	
+	public Diagrama(Canvas canvas1, ListaSimple<String> data) {
 		this.x = 220;
 		this.y = 20;
-		this.canvas = canvas;
+		this.canvas = canvas1;
+		this.datos = data;
 		canvas.addPaintListener(new PaintListener() {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-				LimpiarCanvas limpiar = new LimpiarCanvas(canvas);
-				if(tipo.equals("If")) {
-					//Dibujo rombo 
-					If dale = new If(canvas, x, y);
-					
+				LimpiarCanvas delete = new LimpiarCanvas(canvas1);
 				
-				}else if(tipo.equals("For")) {
-					For wiii = new For(canvas, x, y);
-					
-				}else if(tipo.equals("While")) {
-					While While1 = new While(canvas, x, y);
-				}else if(tipo.equals("doWhile")){
-					doWhile crearDoWhile = new doWhile(canvas, x, y);
+				NodoSimple pivote = data.getInicio();
+				if(pivote.getTipo().equals("if")) {
+					If nuevo = new If(canvas, x, y, pivote);
+				}else if(pivote.getTipo().equals("while")) {
+					While nuevo = new While(canvas, x, y, pivote);
+				}else if(pivote.getTipo().equals("for")) {
+					For nuevo = new For(canvas, x , y, pivote);
+				}else if(pivote.getTipo().equals("do")) {
+					doWhile nuevo = new doWhile(canvas, x, y, pivote);
 				}
+				
+				
 			}
 		});
 	}

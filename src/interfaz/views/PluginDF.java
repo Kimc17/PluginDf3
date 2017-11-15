@@ -5,8 +5,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.part.*;
 
-
+import Estructuras.ListaSimple;
 import Estructuras.MethodVisitor;
+import Estructuras.NodoDoble;
 import Estructuras.listaDoble;
 import Modelo.ArbolDatos;
 
@@ -46,6 +47,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.events.MouseEvent;
 
 
 
@@ -75,13 +78,11 @@ public class PluginDF extends ViewPart {
 		
 		Combo combo = new Combo(composite, SWT.NONE);
 		combo.setBounds(24, 12, 91, 23);	
-		combo.add("If");
-		combo.add("For");
-		combo.add("While");
 	
 		
 		Canvas canvas = new Canvas(composite, SWT.NONE);
-		canvas.setBounds(10, 41, 2000, 2000);
+
+		canvas.setBounds(10, 41, 574, 2000);
 		
 		Button btnLeer = new Button(composite, SWT.NONE);
 		btnLeer.addSelectionListener(new SelectionAdapter() {
@@ -89,13 +90,21 @@ public class PluginDF extends ViewPart {
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnLeer.setBounds(252, 10, 75, 25);
+		btnLeer.setBounds(252, 10, 91, 25);
 		btnLeer.setText("Cargar Métodos");
 		btnLeer.addListener(SWT.Selection, new Listener() {
 			
 			@Override
 			public void handleEvent(Event event) {
-				caca();
+				CargarData();
+				combo.removeAll();
+				NodoDoble pivote = estructura.getInicio();;
+				while(pivote != null) {
+					combo.add(pivote.getName());
+					pivote = pivote.getSiguiente();
+					
+				}
+				
 				
 			}
 		});
@@ -103,16 +112,11 @@ public class PluginDF extends ViewPart {
 	    btnDiagramar.addListener(SWT.Selection, new Listener() {
 	        public void handleEvent(Event e) {
 	        	canvas.redraw();
-	        	canvas.addPaintListener(new PaintListener() {
-					
-					@Override
-					public void paintControl(PaintEvent e) {
-						e.gc.fillRectangle(0, 0, 2000, 2000);
-						
-					}
-				});
-	        	String tipo = combo.getText();
-	        	Diagrama dele = new Diagrama(canvas, tipo);
+	        	
+	        	String metodo = combo.getText();
+	        	ListaSimple datos = estructura.Extraer(metodo);
+	        	Diagrama nuevo = new Diagrama(canvas, datos);
+	        	
 	        	
 	        	
 	        }
@@ -121,7 +125,7 @@ public class PluginDF extends ViewPart {
 
 	}
 	
-	public Object caca() {
+	public Object CargarData() {
 		System.out.println("Clic detectado");
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IWorkspaceRoot root = workspace.getRoot();

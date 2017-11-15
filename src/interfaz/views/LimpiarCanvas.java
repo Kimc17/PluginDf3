@@ -6,8 +6,8 @@ import org.eclipse.swt.widgets.Canvas;
 
 public class LimpiarCanvas {
 	Canvas canvas;
-	public LimpiarCanvas(Canvas canvas) {
-		this.canvas = canvas;
+	public LimpiarCanvas(Canvas canvas1) {
+		this.canvas = canvas1;
 		canvas.addPaintListener(new PaintListener() {
 			
 			@Override

@@ -9,6 +9,24 @@ public class NodoSimple  <T> {
 	String no;
 	String expresion;
 	String  body;
+	public Object getValor() {
+		return valor;
+	}
+
+	public void setValor(Object valor) {
+		this.valor = valor;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
 	String name;
 	Object valor;
 	String tipo;

@@ -82,7 +82,7 @@ public class PluginDF extends ViewPart {
 		
 		Canvas canvas = new Canvas(composite, SWT.NONE);
 
-		canvas.setBounds(10, 41, 574, 2000);
+		canvas.setBounds(10, 41, 2000, 600);
 		
 		Button btnLeer = new Button(composite, SWT.NONE);
 		btnLeer.addSelectionListener(new SelectionAdapter() {

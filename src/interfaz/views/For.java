@@ -38,7 +38,10 @@ public class For {
 				
 				e.gc.drawLine(x+90, y+30, x+120, y+30);
 				e.gc.drawString("No", x+120, y+30);
-				e.gc.drawLine(x+120, y+30, x+120, y+120);
+				e.gc.drawLine(x+120, y+30, x+120, y+200);
+				e.gc.drawLine(x+120, y+200, x, y+200);
+				e.gc.drawLine(x, y+200, x, y+275);
+				
 				
 			}
 		});

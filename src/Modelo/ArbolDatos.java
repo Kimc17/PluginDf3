@@ -145,20 +145,27 @@ public class ArbolDatos {
 		}
 		else if (object instanceof DoStatement ) {
 			System.out.println("Es un Do");
+			DoStatement temp= (DoStatement) object;
+			tipo="Do";
+			body=temp.getBody().toString();
+			expression=temp.getExpression().toString();
+		
 			
 		}
 		else if (object instanceof TryStatement ) {
 			System.out.println("Es un Try");
-			
+			TryStatement temp= (TryStatement) object;
+			tipo= "try";
+			body=temp.getBody().toString();
+			expression=temp.getFinally().toString();
+	
 		}
 		
 		else if (object instanceof SwitchStatement ) {
 			System.out.println("Es un Switch");
-			
-		}
-		else {
-			System.out.println("No es ninguno");
-			return;
+			SwitchStatement temp= (SwitchStatement) object;
+			expression=temp.getExpression().toString();
+		
 			
 		}
 		

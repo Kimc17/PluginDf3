@@ -17,31 +17,19 @@ public class Diagrama{
 			
 			@Override
 			public void paintControl(PaintEvent e) {
+				LimpiarCanvas limpiar = new LimpiarCanvas(canvas);
 				if(tipo.equals("If")) {
 					//Dibujo rombo 
-					e.gc.drawLine(x, y, x+90, y+30);
-					e.gc.drawLine(x+90, y+30, x, y+60);
-					e.gc.drawLine(x, y+60, x-90, y+30);
-					e.gc.drawLine(x-90, y+30, x, y);
-					e.gc.drawString("Condición", x-30, y+20);
-					
-					e.gc.drawLine(x-90, y+30, x-140, y+30);
-					e.gc.drawLine(x-140, y+30, x-140, y+90);
-					e.gc.drawRectangle(x-140-140/4, y+90, 70, 90);
-					e.gc.drawString("Sí", x-140, y+30);
-					e.gc.drawString("Acción", x-160, y+135);
-					
-					e.gc.drawLine(x+90, y+30, x+140, y+30);
-					e.gc.drawLine(x+140, y+30, x+140, y+90);
-					e.gc.drawRectangle(x+140-140/4, y+90, 70, 90);
-					e.gc.drawString("Sí", x+140, y+30);
-					e.gc.drawString("Acción", x+120, y+135);
+					If dale = new If(canvas, x, y);
 					
 				
 				}else if(tipo.equals("For")) {
+					For wiii = new For(canvas, x, y);
 					
 				}else if(tipo.equals("While")) {
-					
+					While While1 = new While(canvas, x, y);
+				}else if(tipo.equals("doWhile")){
+					doWhile crearDoWhile = new doWhile(canvas, x, y);
 				}
 			}
 		});
